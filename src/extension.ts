@@ -96,20 +96,3 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {}
-
-// function plugin(mod: { typescript: typeof ts }) {
-//   console.log('mod.typescript:', mod.typescript);
-//   currentTS = mod.typescript;
-//   return {
-//     create(info: ts.server.PluginCreateInfo) {
-//       console.log(info);
-      
-//       return info.languageService;
-//     }
-//   };
-// };
-
-// plugin.activate = activate;
-// plugin.deactivate = deactivate;
-
-// export = plugin;
