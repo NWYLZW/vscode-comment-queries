@@ -1,8 +1,6 @@
 import type * as ts from 'typescript/lib/tsserverlibrary';
 import * as vscode from "vscode";
 
-class ContinueError extends Error {}
-
 export function activate(context: vscode.ExtensionContext) {
   const provider: vscode.InlayHintsProvider = {
     provideInlayHints: async (model, iRange, cancel) => {
@@ -29,7 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
 
         if (!hint || !hint.body) {
-          throw new ContinueError();
+          return;
         }
 
         // Make a one-liner
@@ -74,14 +72,7 @@ export function activate(context: vscode.ExtensionContext) {
           return [];
         }
 
-        try {
-          await pushHint(inspectionPos, endPos);
-        } catch (e) {
-          if (e instanceof ContinueError) {
-            continue;
-          }
-          throw e;
-        }
+        await pushHint(inspectionPos, endPos);
       }
       return results;
     },
