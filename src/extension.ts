@@ -95,6 +95,34 @@ export function activate(context: vscode.ExtensionContext) {
 
         await pushHint(inspectionPos, endPos);
       }
+
+      // (Type/*<?*/) | (/*>?*/Type)
+      for (const match of text.matchAll(/\/\*(\s*?)([\<|\>])\?(\s*)\*\//gm)) {
+        if (match.index === undefined) {
+          return;
+        }
+        const [,, direction,] = match as [string, string, '<' | '>', string];
+        const end = match.index + 2 + match[1].length + 2;
+        // Add the start range for the inlay hint
+        const endPos = model.positionAt(match.index + match[0].length - 1 + offset + 2);
+
+        const inspectionPos = new vscode.Position(
+          model.positionAt(end + offset).line,
+          model.positionAt(end + offset).character - 1
+        );
+
+        if (cancel.isCancellationRequested) {
+          return [];
+        }
+
+        console.log(
+          inspectionPos,
+          endPos,
+          text.slice(match.index, end),
+        );
+        
+        pushHint(inspectionPos, endPos);
+      }
       return results;
     },
   };
