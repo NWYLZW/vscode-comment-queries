@@ -74,6 +74,27 @@ export function activate(context: vscode.ExtensionContext) {
 
         await pushHint(inspectionPos, endPos);
       }
+
+      for (const match of text.matchAll(/^\s*\/\/\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm)) {
+        if (match.index === undefined) {
+          return;
+        }
+
+        const end = match.index + match[0].length - 1;
+        // Add the start range for the inlay hint
+        const endPos = model.positionAt(end + offset);
+
+        const inspectionPos = new vscode.Position(
+          Number(match[1]) - 1,
+          Number(match[2]),
+        );
+
+        if (cancel.isCancellationRequested) {
+          return [];
+        }
+
+        await pushHint(inspectionPos, endPos);
+      }
       return results;
     },
   };
