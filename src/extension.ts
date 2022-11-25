@@ -75,7 +75,7 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         try {
-          pushHint(inspectionPos, endPos);
+          await pushHint(inspectionPos, endPos);
         } catch (e) {
           if (e instanceof ContinueError) {
             continue;
