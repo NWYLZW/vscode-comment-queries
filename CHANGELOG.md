@@ -6,4 +6,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-- Initial release
+* [ ] 多语言支持
+  * [ ] python
+  * [ ] golang
+  * [ ] rust
+  * [ ] ...任何有 lsp 的语言

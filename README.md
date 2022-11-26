@@ -1,71 +1,95 @@
 # vscode-comment-queries README
 
-This is the README for your extension "vscode-comment-queries". After writing up a brief description, we recommend including the following sections.
+通过注释语法与内嵌提示展示你的代码中的变量类型。
 
-## Features
+## 演示
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+```ts
+type T = {
+  a: string
+  c?: boolean
+  d: 'some desc\n\\n'
+  e: {
+    f: string
+    g: true
+  }
+  fff: 'fier'
+}
 
-For example if there is an image subfolder under your extension project workspace:
+//   _?
+type T0 = T['a']
+//   ^?
 
-\!\[feature X\]\(images/feature-x.png\)
+type T2 = T['e']['f']
+//   ^?
+//           ^x2?
+//               ^x3?
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+// @4,4?
+```
 
-## Requirements
+## 功能
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+* [x] 相对文件行列 query 查询
+    * [x] 上下文件行
 
-## Extension Settings
+    ```ts
+    //   _x2?
+    //   _?
+    type T = 1 | 2
+    //   ^?
+    //   ^x2?
+    ```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+    * [ ] 左右文件列
 
-For example:
+    ```ts
+    type /*>?*/ T /*<?*/ = 1 | 2
+    ```
 
-This extension contributes the following settings:
+* [x] 绝对文件行列 query 查询
+    * [x] 当前文件指定行列
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+        ```ts
+        // @114,514?
+        // @[114, 514]?
+        ```
 
-## Known Issues
+    * [ ] 跨文件指定行列查询
+        * [ ] 相对路径支持
+            
+            ```ts
+            // @./foo.ts:114:514?
+            ```
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+        * [ ] 绝对路径支持
+
+            ```ts
+            // @/users/xxx/codes/foo.ts:114:514?
+            ```
+
+## TODO
+
+* [ ] 多语言支持
+  * [ ] python
+  * [ ] golang
+  * [ ] rust
+  * [ ] ...任何有 lsp 的语言
+
+## 插件配置
+
+~~还不知道有啥配置~~
+
+## Q&A
+
+* Q: 在顶行上行查询或者底行下行查询会报错（可能）
+* A: 我没做校验，先不做
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
+#### 新功能
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+* 相对文件行类型查询
+* 绝对当前文件行列查询
