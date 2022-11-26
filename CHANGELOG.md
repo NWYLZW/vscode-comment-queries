@@ -11,3 +11,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   * [ ] golang
   * [ ] rust
   * [ ] ...任何有 lsp 的语言
+* [ ] 更多的文件支持
+  * [ ] markdown
+  * [ ] html
+  * [ ] vue
+  * [ ] ...一切可以嵌套其他语言的语言
