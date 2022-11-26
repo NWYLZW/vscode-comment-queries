@@ -2,6 +2,7 @@
   "name": "vscode-comment-queries",
   "displayName": "vscode-comment-queries",
   "description": "Query type by comment.",
+  "publisher": "YiJie",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.73.0"
