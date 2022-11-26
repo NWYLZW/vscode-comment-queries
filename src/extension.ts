@@ -1,8 +1,9 @@
 import type * as ts from 'typescript/lib/tsserverlibrary';
 import * as vscode from "vscode";
 
-export function activate(context: vscode.ExtensionContext) {
-  const provider: vscode.InlayHintsProvider = {
+const tsInlayHintsProvider = () => vscode.languages.registerInlayHintsProvider(
+  ["javascript", "typescript", "typescriptreact", "javascriptreact"].map(language => ({ language })),
+  {
     provideInlayHints: async (model, iRange, cancel) => {
       const offset = model.offsetAt(iRange.start);
       const text = model.getText(iRange);
@@ -125,14 +126,11 @@ export function activate(context: vscode.ExtensionContext) {
       // }
       return results;
     },
-  };
+  }
+);
 
-  context.subscriptions.push(
-    vscode.languages.registerInlayHintsProvider(
-      [{ language: "javascript" }, { language: "typescript" }, { language: "typescriptreact" }, { language: "javascriptreact" }],
-      provider
-    )
-  );
+export function activate(context: vscode.ExtensionContext) {
+  context.subscriptions.push(tsInlayHintsProvider());
 }
 
 export function deactivate() {}
