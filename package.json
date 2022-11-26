@@ -3,6 +3,12 @@
   "displayName": "vscode-comment-queries",
   "description": "Query type by comment.",
   "publisher": "YiJie",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:NWYLZW/vscode-comment-queries.git"
+  },
+  "homepage": "https://github.com/NWYLZW/vscode-comment-queries",
+  "license": "MIT",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.73.0"
