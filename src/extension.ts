@@ -4,14 +4,6 @@ import * as vscode from "vscode";
 import textCommentWalker, { NoHintError } from './textWalker';
 import useInlayHintsFor from './useInlayHintsFor';
 
-export const logger = new Proxy(console, {
-  get() {
-    return (...args: any[]) => {
-      console.log(`[vscode-comment-queries]`, ...args);
-    };
-  }
-});
-
 const inlayHintsProviderForJSAndTS = () => useInlayHintsFor(
   ["javascript", "typescript", "typescriptreact", "javascriptreact"],
   textCommentWalker({
