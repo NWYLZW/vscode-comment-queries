@@ -1,6 +1,14 @@
 import type * as ts from 'typescript/lib/tsserverlibrary';
 import * as vscode from "vscode";
 
+const logger = new Proxy(console, {
+  get() {
+    return (...args: any[]) => {
+      console.log(`[vscode-comment-queries]`, ...args);
+    };
+  }
+});
+
 type ProvideInlayHints = vscode.InlayHintsProvider['provideInlayHints'];
 
 type CommentMatcher = [
@@ -34,14 +42,13 @@ function textCommentWalker(
     }
 
     for await (const [regexp, matcher] of inlayHint.matchers) {
-      console.log(regexp, matcher);
       for (const match of text.matchAll(regexp)) {
         if (match.index === undefined) {
           return;
         }
 
         const [insertPos, hintPos] = matcher(
-          model.positionAt(offset + match.index - 1),
+          model.positionAt(offset + match.index - 1 + match[0].length),
           match
         );
         let hint: string | undefined;
@@ -90,6 +97,30 @@ function useInlayHintsFor(
 const inlayHintsProviderForJSAndTS = () => useInlayHintsFor(
   ["javascript", "typescript", "typescriptreact", "javascriptreact"],
   textCommentWalker({
+    async wahtHint({
+      scheme,
+      fsPath,
+      authority,
+      path
+    }, hintPos) {
+      const hint = await vscode.commands.executeCommand(
+        "typescript.tsserverRequest",
+        "quickinfo",
+        {
+          // @ts-ignore
+          __: 'vscode-comment-queries',
+          file: scheme === 'file' ? fsPath : `^/${scheme}/${authority || 'ts-nul-authority'}/${path.replace(/^\//, '')}`,
+          line: hintPos.line + 1,
+          offset: hintPos.character,
+        } as ts.server.protocol.QuickInfoRequest['arguments']
+      ) as ts.server.protocol.QuickInfoResponse;
+
+      if (!hint || !hint.body) {
+        throw new NoHintError();
+      }
+
+      return hint.body.displayString;
+    },
     matchers: [
       [/^\s*\/\/\s*(\^|_)(x\d*)?\?/gm, (endPos, match) => {
         const [, lineOffset] = match[2]?.match(/x(\d*)/) ?? [, '1'];
@@ -117,32 +148,6 @@ const inlayHintsProviderForJSAndTS = () => useInlayHintsFor(
       //   return [];
       // }]
     ],
-    async wahtHint({
-      scheme,
-      fsPath,
-      authority,
-      path
-    }, hintPos) {
-      const hint = await vscode.commands.executeCommand(
-        "typescript.tsserverRequest",
-        "quickinfo",
-        {
-          // @ts-ignore
-          __: 'vscode-comment-queries',
-          file: scheme === 'file' ? fsPath : `^/${scheme}/${authority || 'ts-nul-authority'}/${path.replace(/^\//, '')}`,
-          line: hintPos.line + 1,
-          offset: hintPos.character,
-        } as ts.server.protocol.QuickInfoRequest['arguments']
-      ) as ts.server.protocol.QuickInfoResponse;
-
-      console.log(hintPos);
-      
-      if (!hint || !hint.body) {
-        throw new NoHintError();
-      }
-
-      return hint.body.displayString;
-    },
   }),
 );
 
