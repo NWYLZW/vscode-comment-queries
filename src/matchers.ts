@@ -66,8 +66,8 @@ export const resolveLineMatchResult = (match: RegExpMatchArray) => {
   ] as const;
 };
 
-export default narrowCurry<Record<string, CommentMatcher>>()({
-  twoSlashRelative: [defineLineMatcherRegExp('//', relativeRule), (endPos, match) => {
+export const defineLineMatcher = (prefix: string): CommentMatcher => [
+  defineLineMatcherRegExp(prefix, relativeRule), (endPos, match) => {
     const [offset, lineOffset, direction, charOffset] = resolveLineMatchResult(match);
 
     /* eslint-disable @typescript-eslint/naming-convention */
@@ -84,7 +84,11 @@ export default narrowCurry<Record<string, CommentMatcher>>()({
       }[direction]),
     )];
     /* eslint-enable @typescript-eslint/naming-convention */
-  }],
+  }
+];
+
+export default narrowCurry<Record<string, CommentMatcher>>()({
+  twoSlashRelative: defineLineMatcher('//'),
   twoSlashAbsolute: [/^\s*\/\/\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm, (endPos, match) => [endPos, new Position(
     Number(match[1]),
     Number(match[2])
@@ -98,18 +102,7 @@ export default narrowCurry<Record<string, CommentMatcher>>()({
   //   );
   //   return [];
   // }],
-  sharpRelative: [/^\s*#\s*(\^|_)(x\d*)?\?/gm, (endPos, match) => {
-    const [, lineOffset] = match[2]?.match(/x(\d*)/) ?? [, '1'];
-
-    return [endPos, new Position(
-      endPos.line + ({
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        '^': -1 * Number(lineOffset),
-        '_': 1  * Number(lineOffset),
-      }[match[1] as '^' | '_']),
-      endPos.character
-    )];
-  }],
+  sharpRelative: defineLineMatcher('#'),
   sharpAbsolute: [/^\s*#\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm, (endPos, match) => [endPos, new Position(
     Number(match[1]),
     Number(match[2])
