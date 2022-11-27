@@ -1,7 +1,7 @@
 import './mock.vscode';
 
 import { expect } from "chai";
-import { defineLineMatcherRegExp, relativeRule, resolveLineMatchResult } from "../matchers";
+import { defineRelativeMatcherRegExp, relativeRule, resolveRelativeMatchResult } from "../matchers";
 
 const lineSlashCodes = `
 type T0 = string | number;
@@ -16,7 +16,7 @@ type T1 = T0;//<5?
 describe('Matchers', function () {
   describe('rules', function () {
     it('should test relativeRule', () => {
-      const regexp = defineLineMatcherRegExp('//', relativeRule);
+      const regexp = defineRelativeMatcherRegExp('//', relativeRule);
       const results0 = [
         ['_', '_', '', undefined, undefined],
         ['<5', undefined, '', '<', '5'],
@@ -36,7 +36,7 @@ describe('Matchers', function () {
         const [, all, offset, lineOffset, direction, charOffset] = match;
         expect([all, offset, lineOffset, direction, charOffset])
           .to.deep.equal(results0[count - 1]);
-        expect(resolveLineMatchResult(match))
+        expect(resolveRelativeMatchResult(match))
           .to.deep.equal(results1[count - 1]);
       }
       expect(count).to.equal(results0.length);

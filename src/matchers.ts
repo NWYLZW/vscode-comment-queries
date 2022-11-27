@@ -45,13 +45,13 @@ export const positionRule = '(\\d+,\\d+|\\[\\d+,\\s*\\d+\\])';
  */
 export const absoluteRule = `#(${fileRule}:)?${positionRule}`;
 
-export const defineLineMatcherRegExp = (prefix: string, rule: string) => new RegExp(
+export const defineRelativeMatcherRegExp = (prefix: string, rule: string) => new RegExp(
   `(?<!${prefix}\\s*)${prefix}\\s*(${rule})\\?$`, 'gm'
 );
 
 export class ParseError extends Error {}
 
-export const resolveLineMatchResult = (match: RegExpMatchArray) => {
+export const resolveRelativeMatchResult = (match: RegExpMatchArray) => {
   const [all, , offset, lineOffsetStr, direction, charOffsetStr] = match;
   const lineOffset = +(lineOffsetStr || 1);
   const charOffset = +(charOffsetStr || 1);
@@ -66,9 +66,9 @@ export const resolveLineMatchResult = (match: RegExpMatchArray) => {
   ] as const;
 };
 
-export const defineLineMatcher = (prefix: string): CommentMatcher => [
-  defineLineMatcherRegExp(prefix, relativeRule), (endPos, match) => {
-    const [offset, lineOffset, direction, charOffset] = resolveLineMatchResult(match);
+export const defineRelativeMatcher = (prefix: string): CommentMatcher => [
+  defineRelativeMatcherRegExp(prefix, relativeRule), (endPos, match) => {
+    const [offset, lineOffset, direction, charOffset] = resolveRelativeMatchResult(match);
 
     /* eslint-disable @typescript-eslint/naming-convention */
     return [endPos, new Position(
@@ -88,7 +88,7 @@ export const defineLineMatcher = (prefix: string): CommentMatcher => [
 ];
 
 export default narrowCurry<Record<string, CommentMatcher>>()({
-  twoSlashRelative: defineLineMatcher('//'),
+  twoSlashRelative: defineRelativeMatcher('//'),
   twoSlashAbsolute: [/^\s*\/\/\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm, (endPos, match) => [endPos, new Position(
     Number(match[1]),
     Number(match[2])
@@ -102,7 +102,7 @@ export default narrowCurry<Record<string, CommentMatcher>>()({
   //   );
   //   return [];
   // }],
-  sharpRelative: defineLineMatcher('#'),
+  sharpRelative: defineRelativeMatcher('#'),
   sharpAbsolute: [/^\s*#\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm, (endPos, match) => [endPos, new Position(
     Number(match[1]),
     Number(match[2])
