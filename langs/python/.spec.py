@@ -12,23 +12,6 @@ T = TypedDict('T', {
     'd': D,
 })
 
-t = T(a=1, b=None, c='foo', d={
-    'e': 1,
-    'f': None,
-})
-
-a = t['a']
-#^? [int]
-
-b = t['b']
-#^? [Optional[str]]
-
-c = t['c']
-#^? [Literal['foo', 'bar', 'some\ndesc\\n']]
-
-d = t['d']
-#^? [D]
-
 KT = TypeVar('KT')
 
 class F(Generic[KT]):
@@ -36,5 +19,18 @@ class F(Generic[KT]):
     def __init__(self, kt: KT):
         self.kt = kt
 
-f_kt = F(1).kt
-#^? [int]
+if __name__ == 'main':
+    t = T(a=1, b=None, c='foo', d={
+        'e': 1,
+        'f': None,
+    })
+    _a = t['a']
+    #^?
+    _b = t['b']
+    #^?
+    _c = t['c']
+    #^?
+    _d = t['d']
+    #^?
+    f_kt = F(1).kt
+    #^?
