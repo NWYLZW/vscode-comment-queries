@@ -2,6 +2,7 @@ import type * as ts from 'typescript/lib/tsserverlibrary';
 import * as vscode from "vscode";
 
 import textCommentWalker, { NoHintError } from './textWalker';
+import useInlayHintsFor from './useInlayHintsFor';
 
 export const logger = new Proxy(console, {
   get() {
@@ -10,20 +11,6 @@ export const logger = new Proxy(console, {
     };
   }
 });
-
-function useInlayHintsFor(
-  langs: string[],
-  provideInlayHints: vscode.InlayHintsProvider['provideInlayHints'],
-  opts: Omit<vscode.InlayHintsProvider, 'provideInlayHints'> = {},
-) {
-  return vscode.languages.registerInlayHintsProvider(
-    langs.map(language => ({ language })),
-    {
-      provideInlayHints,
-      ...opts
-    }
-  );
-}
 
 const inlayHintsProviderForJSAndTS = () => useInlayHintsFor(
   ["javascript", "typescript", "typescriptreact", "javascriptreact"],
