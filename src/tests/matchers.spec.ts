@@ -3,7 +3,7 @@ import './mock.vscode';
 import { expect } from "chai";
 import { defineRelativeMatcherRegExp, relativeRule, resolveRelativeMatchResult } from "../matchers";
 
-const lineSlashCodes = `
+const relativeTwoSlashTestCodes = `
 type T0 = string | number;
 //   _?
 type T1 = T0;//<5?
@@ -31,7 +31,7 @@ describe('Matchers', function () {
       ];
 
       let count = 0;
-      for (const match of lineSlashCodes.matchAll(regexp)) {
+      for (const match of relativeTwoSlashTestCodes.matchAll(regexp)) {
         count++;
         const [, all, offset, lineOffset, direction, charOffset] = match;
         expect([all, offset, lineOffset, direction, charOffset])
