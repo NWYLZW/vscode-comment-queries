@@ -22,7 +22,8 @@
     "onLanguage:typescript",
     "onLanguage:typescriptreact",
     "onLanguage:jsx-tags",
-    "onLanguage:python"
+    "onLanguage:python",
+    "onLanguage:go"
   ],
   "main": "./out/extension.js",
   "scripts": {
