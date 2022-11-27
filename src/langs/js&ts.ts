@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 
 import textCommentWalker, { NoHintError } from "../textWalker";
 import useInlayHintsFor from "../useInlayHintsFor";
+import matchers from '../matchers';
 
 export default () => useInlayHintsFor(
   ["javascript", "typescript", "typescriptreact", "javascriptreact"],
@@ -32,31 +33,8 @@ export default () => useInlayHintsFor(
       return hint.body.displayString;
     },
     matchers: [
-      [/^\s*\/\/\s*(\^|_)(x\d*)?\?/gm, (endPos, match) => {
-        const [, lineOffset] = match[2]?.match(/x(\d*)/) ?? [, '1'];
-
-        return [endPos, new vscode.Position(
-          endPos.line + ({
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            '^': -1 * Number(lineOffset),
-            '_': 1  * Number(lineOffset),
-          }[match[1] as '^' | '_']),
-          endPos.character
-        )];
-      }],
-      [/^\s*\/\/\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm, (endPos, match) => [endPos, new vscode.Position(
-        Number(match[1]),
-        Number(match[2])
-      )]],
-      // TODO (Type/*<?*/) | (/*>?*/Type)
-      // [/\/\*(\s*?)([\<|\>])\?(\s*)\*\//gm, (endPos, match) => {
-      //   const [,, direction,] = match as [string, string, '<' | '>', string];
-      //   const inspectionPos = new vscode.Position(
-      //     endPos.line,
-      //     endPos.character - 1
-      //   );
-      //   return [];
-      // }]
+      matchers.twoSlashRelative,
+      matchers.twoSlashAbsolute,
     ],
   }),
 );
