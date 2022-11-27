@@ -1,15 +1,8 @@
 import * as vscode from "vscode";
 import logger from "./logger";
+import { CommentMatcher } from "./matchers";
 
 export type ProvideInlayHints = vscode.InlayHintsProvider['provideInlayHints'];
-
-export type CommentMatcher = [
-  regexp: RegExp,
-  matcher: (
-    endPos: vscode.Position,
-    math: RegExpMatchArray,
-  ) => [insertPos: vscode.Position, hintPos: vscode.Position]
-];
 
 export type InlayHint = {
   matchers: CommentMatcher[];
