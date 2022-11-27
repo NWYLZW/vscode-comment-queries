@@ -7,7 +7,7 @@ const relativeTwoSlashTestCodes = `
 type T0 = string | number;
 //   _?
 type T1 = T0;//<5?
-//   ^?
+  // ^?
 //   ^2?
 // ignore next line
 // // ^?
