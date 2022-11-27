@@ -45,7 +45,7 @@ export const positionRule = '(\\d+,\\d+|\\[\\d+,\\s*\\d+\\])';
  */
 export const absoluteRule = `#(${fileRule}:)?${positionRule}`;
 
-export const defineLineMatcher = (prefix: string, rule: string) => new RegExp(
+export const defineLineMatcherRegExp = (prefix: string, rule: string) => new RegExp(
   `(?<!${prefix}\\s*)${prefix}\\s*(${rule})\\?$`, 'gm'
 );
 
@@ -67,7 +67,7 @@ export const resolveLineMatchResult = (match: RegExpMatchArray) => {
 };
 
 export default narrowCurry<Record<string, CommentMatcher>>()({
-  twoSlashRelative: [defineLineMatcher('//', relativeRule), (endPos, match) => {
+  twoSlashRelative: [defineLineMatcherRegExp('//', relativeRule), (endPos, match) => {
     const [offset, lineOffset, direction, charOffset] = resolveLineMatchResult(match);
 
     /* eslint-disable @typescript-eslint/naming-convention */
