@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import logger from "./logger";
 
 export type ProvideInlayHints = vscode.InlayHintsProvider['provideInlayHints'];
 
@@ -48,6 +49,10 @@ export default function textCommentWalker(
         } catch (e) {
           if (e instanceof NoHintError) {
             continue;
+          }
+          if (e instanceof Error) {
+            hint = e.message;
+            logger.error(e);
           }
           throw e;
         }
