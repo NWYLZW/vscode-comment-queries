@@ -17,6 +17,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * [ ] 配置增强
   * [ ] 移除提示消息的前缀
   * [ ] 消息展示长度限制
+* [ ] 辅助生成类型查询注释
+  * [ ] 右键菜单
+  * [ ] 快捷键
 * [ ] 使用折叠面板的方式展示消息 [Hover Marker](https://vshaxe.github.io/vscode-extern/vscode/Hover.html)
 * [ ] 子查询
 
