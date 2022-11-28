@@ -14,20 +14,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   * [ ] html
   * [ ] vue
   * [ ] ...一切可以嵌套其他语言的语言
-* [ ] 配置增强
-  * [ ] 移除提示消息的前缀
-  * [ ] 消息展示长度限制
-* [ ] 辅助生成类型查询注释
-  * [ ] 右键菜单
-  * [ ] 快捷键
-* [ ] 使用折叠面板的方式展示消息 [Hover Marker](https://vshaxe.github.io/vscode-extern/vscode/Hover.html)
-* [ ] 子查询
-
-  ```ts
-  type T = { a: { b: c: number } }
-  //   ^?.a.b.c (property) [number]
-  //   ^2?['a'] (property) [{ b: { c: number; }; }]
-  ```
+* [ ] 移除提示消息的前缀
+* [ ] 消息展示长度限制
 
 ## [1.1.0] - 2022-11-28
 
