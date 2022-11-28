@@ -6,7 +6,7 @@ export type CommentMatcher = [
   regexp: RegExp,
   matcher: (
     endPos: Position,
-    math: RegExpMatchArray,
+    match: RegExpMatchArray,
   ) => [insertPos: Position, hintPos: Position, file?: string],
 ];
 
