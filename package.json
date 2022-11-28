@@ -9,7 +9,7 @@
   },
   "homepage": "https://github.com/NWYLZW/vscode-comment-queries",
   "license": "MIT",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "engines": {
     "vscode": "^1.73.0"
   },
