@@ -20,7 +20,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * [ ] 辅助生成类型查询注释
   * [ ] 右键菜单
   * [ ] 快捷键
-* [ ] 快速跳转到定义
 * [ ] 使用折叠面板的方式展示消息 [Hover Marker](https://vshaxe.github.io/vscode-extern/vscode/Hover.html)
 * [ ] 子查询
 
@@ -29,6 +28,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   //   ^?.a.b.c (property) [number]
   //   ^2?['a'] (property) [{ b: { c: number; }; }]
   ```
+
+## [1.2.1] - 2022-11-28
+
+### 新功能
+
+* [x] 快速跳转到查询目标的位置
 
 ## [1.1.0] - 2022-11-28
 
