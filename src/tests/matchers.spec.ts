@@ -78,15 +78,10 @@ describe('Matchers', function () {
         ['D:/codes/a/b/c d/e', 1, 1],
       ];
 
-      // console.log(regexp);
-
       let count = 0;
       for (const match of absoluteTwoSlashTestCodes.matchAll(regexp)) {
-        // console.log(match);
-
         count++;
         const [, all, fileWithColon, position] = match;
-        console.log(match);
 
         const file = fileWithColon ? fileWithColon.slice(0, -1) : '';
         expect([all, file, position])
