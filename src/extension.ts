@@ -15,7 +15,6 @@ export function activate(context: vscode.ExtensionContext) {
       ["javascript", "typescript", "typescriptreact", "javascriptreact"], {
         provideDefinition: async (model, position) => {
           const line = model.lineAt(position.line);
-          const endPos = new vscode.Position(position.line, line.text.length);
           for (const [regexp, matcher] of [
             matchers.twoSlashRelative,
             matchers.twoSlashAbsolute,
