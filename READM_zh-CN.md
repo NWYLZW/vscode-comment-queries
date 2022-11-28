@@ -4,29 +4,21 @@
 
 ## 演示
 
-```ts
-type T = {
-  a: string
-  c?: boolean
-  d: 'some desc\n\\n'
-  e: {
-    f: string
-    g: true
-  }
-  fff: 'fier'
-}
+### 相对查询
 
-//   _?
-type T0 = T['a']
-//   ^?
+[pre-line-point](./images/pre-line-point.gif)
 
-type T2 = T['e']['f']
-//   ^?
-//           ^x2?
-//               ^x3?
+[next-line-point](./images/next-line-point.gif)
 
-// @4,4?
-```
+[left-right-point](./images/left-right-point.gif)
+
+[cross-line-point](./images/cross-line-point.gif)
+
+### 绝对查询
+
+[absolute-point](./images/abs-in-cur-file.gif)
+
+[cross-file-point](./images/cross-file-point.gif)
 
 ## 功能
 
