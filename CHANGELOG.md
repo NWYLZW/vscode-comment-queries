@@ -15,6 +15,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   * [ ] vue
   * [ ] ...一切可以嵌套其他语言的语言
 * [ ] 移除提示消息的前缀
+* [ ] 消息展示长度限制
+
+## [1.1.0] - 2022-11-28
+
+### 新功能
+
+* [x] 跨文件追踪
 
 ## [1.0.1] - 2022-11-27
 
