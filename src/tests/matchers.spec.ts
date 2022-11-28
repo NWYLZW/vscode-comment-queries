@@ -22,6 +22,7 @@ const absoluteTwoSlashTestCodes = `
 // &./a.b.c-d_e:1,1?
 // &./a/b/c d/e:1,1?
 // &/codes/a/b/c d/e:1,1?
+// &D:/codes/a/b/c d/e:1,1?
 `.trim();
 
 describe('Matchers', function () {
@@ -63,6 +64,7 @@ describe('Matchers', function () {
         ['./a.b.c-d_e:1,1', './a.b.c-d_e', '1,1'],
         ['./a/b/c d/e:1,1', './a/b/c d/e', '1,1'],
         ['/codes/a/b/c d/e:1,1', '/codes/a/b/c d/e', '1,1'],
+        ['D:/codes/a/b/c d/e:1,1', 'D:/codes/a/b/c d/e', '1,1'],
       ];
       const results1 = [
         ['', 1, 1],
@@ -73,6 +75,7 @@ describe('Matchers', function () {
         ['./a.b.c-d_e', 1, 1],
         ['./a/b/c d/e', 1, 1],
         ['/codes/a/b/c d/e', 1, 1],
+        ['D:/codes/a/b/c d/e', 1, 1],
       ];
 
       // console.log(regexp);

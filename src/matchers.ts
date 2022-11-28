@@ -71,8 +71,9 @@ export const defineRelativeMatcher = (prefix: string): CommentMatcher => [
  * * [ ] ./a/b/c d/e
  * * [ ] ./a.b.c-d_e
  * * [ ] /codes/a/b/c d/e
+ * * [ ] D:/codes/a/b/c d/e
  */
-export const fileRule = '(?:\\.)?\\/(?:[\\w|_|\\-|\\.| ]+\\/)*[\\w|_|\\-|\\.| ]+(?:\\.\\w+)*';
+export const fileRule = '(?:[a-z|A-Z]\:)?(?:\\.)?\\/(?:[\\w|_|\\-|\\.| ]+\\/)*[\\w|_|\\-|\\.| ]+(?:\\.\\w+)*';
 /**
  * position rule
  * like:
