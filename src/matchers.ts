@@ -7,7 +7,7 @@ export type CommentMatcher = [
   matcher: (
     endPos: Position,
     math: RegExpMatchArray,
-  ) => [insertPos: Position, hintPos: Position]
+  ) => [insertPos: Position, hintPos: Position, file?: string],
 ];
 
 /**
@@ -20,30 +20,6 @@ export type CommentMatcher = [
  * * [x] ^3<2
  */
 export const relativeRule = '(\\^|_)?(\\d*)(<|>)?(\\d*)?';
-/**
- * file rule
- * like:
- * * [ ] ./a
- * * [ ] ./a/b
- * * [ ] ./a/b/c d/e
- * * [ ] /codes/a/b/c d/e
- */
-export const fileRule = '(\\.\\/|\\/)?(\\S+\\s+)?(\\S+)';
-/**
- * position rule
- * like:
- * * [ ] 1,2
- * * [ ] [1,2]
- * * [ ] [1, 2]
- */
-export const positionRule = '(\\d+,\\d+|\\[\\d+,\\s*\\d+\\])';
-/**
- * absolute rule
- * like:
- * * [ ] #positionRule
- * * [ ] #fileRule:potionRule
- */
-export const absoluteRule = `#(${fileRule}:)?${positionRule}`;
 
 export const defineRelativeMatcherRegExp = (prefix: string, rule: string) => new RegExp(
   `(?<!${prefix}\\s*)${prefix}\\s*(${rule})\\?$`, 'gm'
@@ -87,12 +63,57 @@ export const defineRelativeMatcher = (prefix: string): CommentMatcher => [
   }
 ];
 
+/**
+ * file rule
+ * like:
+ * * [ ] ./a
+ * * [ ] ./a/b
+ * * [ ] ./a/b/c d/e
+ * * [ ] ./a.b.c-d_e
+ * * [ ] /codes/a/b/c d/e
+ */
+export const fileRule = '(?:\\.)?\\/(?:[\\w|_|\\-|\\.| ]+\\/)*[\\w|_|\\-|\\.| ]+(?:\\.\\w+)*';
+/**
+ * position rule
+ * like:
+ * * [ ] 1,2
+ * * [ ] [1,2]
+ * * [ ] [1, 2]
+ * * [ ] 1:2
+ */
+export const positionRule = '(\\d+[,|:]\\d+|\\[\\d+[,|:]\\s*\\d+\\])';
+/**
+ * absolute rule
+ * like:
+ * * [ ] positionRule
+ * * [ ] fileRule:potionRule
+ */
+export const absoluteRule = `(${fileRule}:)?${positionRule}`;
+
+export const defineAbsoluteMatcherRegExp = (prefix: string, rule: string) => new RegExp(
+  `(?<!${prefix}\\s*)${prefix}\\s*&(${rule})\\?$`, 'gm'
+);
+
+export const resolveAbsoluteMatchResult = (match: RegExpMatchArray) => {
+  const [, all, fileWithColon, position] = match;
+  const file = fileWithColon ? fileWithColon.slice(0, -1) : '';
+  const [line, char] = position.replace(/\[|\]/g, '').split(/[,|:]/);
+  if (Number.isNaN(line) || Number.isNaN(char)) {
+    throw new ParseError(`invalid position: ${all}`);
+  }
+  return [file, +line, +char] as const;
+};
+
+export const defineAbsoluteMatcher = (prefix: string): CommentMatcher => [
+  defineAbsoluteMatcherRegExp(prefix, absoluteRule), (endPos, match) => {
+    const [file, line, char] = resolveAbsoluteMatchResult(match);
+    return [endPos, new Position(line, char), file];
+  }
+];
+
 export default narrowCurry<Record<string, CommentMatcher>>()({
   twoSlashRelative: defineRelativeMatcher('//'),
-  twoSlashAbsolute: [/^\s*\/\/\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm, (endPos, match) => [endPos, new Position(
-    Number(match[1]),
-    Number(match[2])
-  )]],
+  twoSlashAbsolute: defineAbsoluteMatcher('//'),
   // TODO (Type/*<?*/) | (/*>?*/Type)
   // [/\/\*(\s*?)([\<|\>])\?(\s*)\*\//gm, (endPos, match) => {
   //   const [,, direction,] = match as [string, string, '<' | '>', string];
