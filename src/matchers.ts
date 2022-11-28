@@ -22,6 +22,12 @@ export type CommentMatcher = [
 export const relativeRule = '(\\^|_)?(\\d*)(<|>)?(\\d*)?';
 
 export const defineRelativeMatcherRegExp = (prefix: string, rule: string) => new RegExp(
+  /**
+   * TODO
+   * * [x] //<6
+   * * [x] // //<6
+   * * [ ] // some //<6
+   */
   `(?<!${prefix}\\s*)${prefix}\\s*(${rule})\\?$`, 'gm'
 );
 
@@ -108,7 +114,7 @@ export const resolveAbsoluteMatchResult = (match: RegExpMatchArray) => {
 export const defineAbsoluteMatcher = (prefix: string): CommentMatcher => [
   defineAbsoluteMatcherRegExp(prefix, absoluteRule), (endPos, match) => {
     const [file, line, char] = resolveAbsoluteMatchResult(match);
-    return [endPos, new Position(line, char), file];
+    return [endPos, new Position(line - 1, char), file];
   }
 ];
 
@@ -125,8 +131,5 @@ export default narrowCurry<Record<string, CommentMatcher>>()({
   //   return [];
   // }],
   sharpRelative: defineRelativeMatcher('#'),
-  sharpAbsolute: [/^\s*#\s*@\[?(\d+)\,\s?(\d+)\]?\?/gm, (endPos, match) => [endPos, new Position(
-    Number(match[1]),
-    Number(match[2])
-  )]],
+  sharpAbsolute: defineAbsoluteMatcher('#'),
 });

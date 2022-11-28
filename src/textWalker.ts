@@ -1,3 +1,4 @@
+import path = require("path");
 import * as vscode from "vscode";
 import logger from "./logger";
 import { CommentMatcher } from "./matchers";
@@ -32,13 +33,23 @@ export default function textCommentWalker(
           return;
         }
 
-        const [insertPos, hintPos] = matcher(
+        const [insertPos, hintPos, file] = matcher(
           model.positionAt(offset + match.index - 1 + match[0].length),
           match
         );
         let hint: string | undefined;
         try {
-          hint = await inlayHint.wahtHint(model.uri, hintPos);
+          let uri = model.uri;
+          if (file) {
+            if (file.startsWith("/")) {
+              uri = vscode.Uri.file(file);
+            }
+            if (file.startsWith(".")) {
+              const dir = model.uri.path.split("/").slice(0, -1).join("/");
+              uri = vscode.Uri.file(path.join(dir, file));
+            }
+          }
+          hint = await inlayHint.wahtHint(uri, hintPos);
         } catch (e) {
           if (e instanceof NoHintError) {
             continue;
