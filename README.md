@@ -6,19 +6,19 @@
 
 ### 相对查询
 
-![pre-line-point](./images/pre-line-point.gif)
+![pre-line-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/pre-line-point.gif)
 
-![next-line-point](./images/next-line-point.gif)
+![next-line-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/next-line-point.gif)
 
-![left-right-point](./images/left-right-point.gif)
+![left-right-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/left-right-point.gif)
 
-![cross-line-point](./images/cross-line-point.gif)
+![cross-line-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/cross-line-point.gif)
 
 ### 绝对查询
 
-![absolute-point](./images/abs-in-cur-file.gif)
+![absolute-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/abs-in-cur-file.gif)
 
-![cross-file-point](./images/cross-file-point.gif)
+![cross-file-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/cross-file-point.gif)
 
 ## 功能
 
