@@ -30,7 +30,7 @@ import matchers from "../matchers";
 export default () => useInlayHintsFor(
   ["go"],
   textCommentWalker({
-    wahtHint: useHint("go"),
+    whatHint: useHint("go"),
     matchers: [
       matchers.twoSlashRelative,
       matchers.twoSlashAbsolute,

@@ -8,7 +8,7 @@ import matchers from '../matchers';
 export default () => useInlayHintsFor(
   ["javascript", "typescript", "typescriptreact", "javascriptreact"],
   textCommentWalker({
-    async wahtHint({
+    async whatHint({
       scheme,
       fsPath,
       authority,

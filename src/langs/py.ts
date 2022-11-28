@@ -8,7 +8,7 @@ import matchers from "../matchers";
 export default () => useInlayHintsFor(
   ["python"],
   textCommentWalker({
-    wahtHint: useHint("python"),
+    whatHint: useHint("python"),
     matchers: [
       matchers.sharpRelative,
       matchers.sharpAbsolute,

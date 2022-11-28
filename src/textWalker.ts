@@ -7,7 +7,7 @@ export type ProvideInlayHints = vscode.InlayHintsProvider['provideInlayHints'];
 
 export type InlayHint = {
   matchers: CommentMatcher[];
-  wahtHint: (
+  whatHint: (
     uri: vscode.Uri,
     hintPos: vscode.Position
   ) => Promise<string>;
@@ -49,7 +49,7 @@ export default function textCommentWalker(
               uri = vscode.Uri.file(path.join(dir, file));
             }
           }
-          hint = await inlayHint.wahtHint(uri, hintPos);
+          hint = await inlayHint.whatHint(uri, hintPos);
         } catch (e) {
           if (e instanceof NoHintError) {
             continue;
