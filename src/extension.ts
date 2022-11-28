@@ -7,9 +7,11 @@ import logger from "./logger";
 import matchers from "./matchers";
 
 export function activate(context: vscode.ExtensionContext) {
-  context.subscriptions.push(inlayHintsProviderForJSAndTS());
-  context.subscriptions.push(inlayHintsProviderForPY());
-  context.subscriptions.push(inlayHintsProviderForGO());
+  context.subscriptions.push(...[
+    inlayHintsProviderForJSAndTS(),
+    inlayHintsProviderForPY(),
+    inlayHintsProviderForGO(),
+  ]);
   context.subscriptions.push(
     vscode.languages.registerDefinitionProvider(
       ["javascript", "typescript", "typescriptreact", "javascriptreact"], {
