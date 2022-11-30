@@ -61,7 +61,6 @@ export default function textCommentWalker(
           throw e;
         }
         let text = hint
-          .replace(/\/n/g, " ")
           .replace(/\n */g, "␊")
           .replace(/[\u0000-\u001F\u007F-\u009F]/g, "");
         if (text.length > 120) {
