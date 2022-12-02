@@ -20,6 +20,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 * [ ] 辅助生成类型查询注释
   * [ ] 右键菜单
   * [ ] 快捷键
+* [ ] 支持 ⌄vV
 * [ ] 使用 `ZoneWidget(折叠面板)` 的方式展示消息
   * 需求来自于 [orta/vscode-twoslash-queries#2](https://github.com/orta/vscode-twoslash-queries/issues/2)
   * 目前 vscode 未暴露任何 API，需要等待 vscode 支持该功能。[microsoft/vscode#140752](https://github.com/microsoft/vscode/issues/140752)
