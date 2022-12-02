@@ -1,4 +1,8 @@
-# vscode-comment-queries README
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/favicon.svg" width=128 height=128 >
+</p>
+
+# Vscode Comment Queries
 
 通过注释语法与内嵌提示展示你的代码中的变量类型。
 
@@ -74,5 +78,13 @@
 
 * Q: 在顶行上行查询或者底行下行查询会报错（可能）
 * A: 我没做校验，先不做
+* Q: 查询对应行列无元素的时候会偏移计算失误
+* A: 还不想修，你自己可以修
+* Q: 为什么不支持在 python 和 go 中 (<ctrl|cmd> + mouse right click) 跳转到定义
+* A: 没有实现，个人暂时没有需求（你可以提供一个 pr 支持）
+
+## 相关
+
+在 [IDEA](https://github.com/NWYLZW/idea-comment-queries) 中使用
 
 ## [Release Notes](./CHANGELOG.md)
