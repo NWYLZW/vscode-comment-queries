@@ -1,0 +1,146 @@
+<svg
+    width="512" height="512"
+    viewBox="0 0 512 512"
+    xmlns="http://www.w3.org/2000/svg"
+>
+    <defs>
+        <filter
+                id="rectShadow"
+                x="-100%" y="-100%"
+                width="400%" height="400%"
+        >
+            <feOffset
+                    in="SourceAlpha"
+                    result="offOut"
+                    dx="20" dy="20"
+            />
+            <feGaussianBlur
+                    in="offOut"
+                    result="offBlurOut"
+                    stdDeviation="20"
+            />
+            <feFlood
+                    in="SourceAlpha"
+                    result="color"
+                    flood-color="black"
+                    flood-opacity="1"
+            />
+            <feComposite
+                    operator="in"
+                    in="color"
+                    in2="offBlurOut"
+                    result="shadow"
+            />
+            <feBlend in="SourceGraphic" in2="shadow" />
+        </filter>
+        <filter
+                id="rectInsetShadow"
+                x="0" y="0"
+                width="100%" height="100%"
+        >
+            <feOffset
+                    dx="0" dy="0"
+            />
+            <feGaussianBlur
+                    result="offBlurOut"
+                    stdDeviation="10"
+            />
+            <feComposite
+                    operator="out"
+                    in="SourceGraphic"
+                    in2="offBlurOut"
+                    result="inverse"
+            />
+            <feFlood
+                    in="SourceAlpha"
+                    result="color"
+                    flood-color="white"
+                    flood-opacity=".2"
+            />
+            <feComposite
+                    operator="in"
+                    in="color"
+                    in2="inverse"
+                    result="shadow"
+            />
+            <feComposite in="shadow"
+                         in2="SourceGraphic"/>
+        </filter>
+        <linearGradient
+            id="rectGradient"
+            gradientTransform="rotate(40)"
+        >
+            <stop offset="0" stop-color="#48c6ef"/>
+            <stop offset="1" stop-color="#4f86d6"/>
+        </linearGradient>
+        <linearGradient
+            id="fontGradient"
+            gradientTransform="rotate(30)"
+        >
+            <stop offset="0.2"
+                  stop-color="#3f86f6"
+                  stop-opacity="0.3"
+            />
+            <stop offset="0.8"
+                  stop-color="#38c6ff"
+                  stop-opacity="0.4"
+            />
+        </linearGradient>
+    </defs>
+    <rect id="rect"
+          x="50" y="50"
+          rx="32" ry="32"
+          width="412" height="412"
+          fill="#ffffff"
+    />
+    <rect id="rect"
+          x="50" y="50"
+          rx="32" ry="32"
+          width="412" height="412"
+          fill="url(#rectGradient)"
+          fill-opacity=".8"
+          filter="url(#rectInsetShadow)"
+    />
+    <rect id="rect"
+          x="50" y="50"
+          rx="32" ry="32"
+          width="412" height="412"
+          fill="#ffffff"
+          fill-opacity=".2"
+          filter="url(#rectShadow)"
+    />
+    <g fill="#000000"
+       fill-opacity=".4"
+       filter="url(#rectShadow)"
+    >
+        <svg width="140" height="140"
+             viewBox="0 0 512 512"
+             x="100" y="100"
+        >
+            <path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/>
+        </svg>
+        <svg width="256" height="256"
+             viewBox="0 0 512 512"
+             x="250" y="138"
+        >
+            <path d="M96 96c-17.7 0-32 14.3-32 32s-14.3 32-32 32s-32-14.3-32-32C0 75 43 32 96 32h97c70.1 0 127 56.9 127 127c0 52.4-32.2 99.4-81 118.4l-63 24.5 0 18.1c0 17.7-14.3 32-32 32s-32-14.3-32-32V301.9c0-26.4 16.2-50.1 40.8-59.6l63-24.5C240 208.3 256 185 256 159c0-34.8-28.2-63-63-63H96zm48 384c-22.1 0-40-17.9-40-40s17.9-40 40-40s40 17.9 40 40s-17.9 40-40 40z"/>
+        </svg>
+    </g>
+    <g fill="#000000"
+       fill-opacity=".6"
+       filter="url(#rectInsetShadow)"
+    >
+        <svg width="140" height="140"
+             viewBox="0 0 512 512"
+             x="100" y="100"
+        >
+            <path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/>
+        </svg>
+        <svg width="256" height="256"
+             viewBox="0 0 512 512"
+             x="250" y="138"
+        >
+            <path d="M96 96c-17.7 0-32 14.3-32 32s-14.3 32-32 32s-32-14.3-32-32C0 75 43 32 96 32h97c70.1 0 127 56.9 127 127c0 52.4-32.2 99.4-81 118.4l-63 24.5 0 18.1c0 17.7-14.3 32-32 32s-32-14.3-32-32V301.9c0-26.4 16.2-50.1 40.8-59.6l63-24.5C240 208.3 256 185 256 159c0-34.8-28.2-63-63-63H96zm48 384c-22.1 0-40-17.9-40-40s17.9-40 40-40s40 17.9 40 40s-17.9 40-40 40z"/>
+        </svg>
+    </g>
+</svg>
