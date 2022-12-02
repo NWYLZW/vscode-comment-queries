@@ -19,15 +19,9 @@ export type CommentMatcher = [
  * * [x] ^3<
  * * [x] ^3<2
  */
-export const relativeRule = '(\\^|_)?(\\d*)(<|>)?(\\d*)?';
+export const relativeRule = '(\\^|_|v|V|⌄)?(\\d*)(<|>)?(\\d*)?';
 
 export const defineRelativeMatcherRegExp = (prefix: string, rule: string) => new RegExp(
-  /**
-   * TODO
-   * * [x] //<6
-   * * [x] // //<6
-   * * [ ] // some //<6
-   */
   `(?<!${prefix}\\s*)${prefix}\\s*(${rule})\\?$`, 'gm'
 );
 
@@ -41,7 +35,7 @@ export const resolveRelativeMatchResult = (match: RegExpMatchArray) => {
     throw new ParseError(`invalid offset: ${all}`);
   }
   return [
-    (offset || '') as '^' | '_' | '',
+    (offset || '') as '^' | '_' | '' | 'v' | 'V' | '⌄',
     lineOffset,
     (direction || '') as '<' | '>' | '',
     charOffset,
@@ -56,12 +50,15 @@ export const defineRelativeMatcher = (prefix: string): CommentMatcher => [
     return [endPos, new Position(
       endPos.line + ({
         '^': -1 * Number(lineOffset),
-        '_': 1  * Number(lineOffset),
+        '_': +1 * Number(lineOffset),
+        'v': +1 * Number(lineOffset),
+        'V': +1 * Number(lineOffset),
+        '⌄': +1 * Number(lineOffset),
         '': 0,
       }[offset]),
       endPos.character + ({
         '<': -1 * Number(charOffset),
-        '>': 1  * Number(charOffset),
+        '>': +1 * Number(charOffset),
         '': 0,
       }[direction]),
     )];
@@ -72,28 +69,28 @@ export const defineRelativeMatcher = (prefix: string): CommentMatcher => [
 /**
  * file rule
  * like:
- * * [ ] ./a
- * * [ ] ./a/b
- * * [ ] ./a/b/c d/e
- * * [ ] ./a.b.c-d_e
- * * [ ] /codes/a/b/c d/e
- * * [ ] D:/codes/a/b/c d/e
+ * * [x] ./a
+ * * [x] ./a/b
+ * * [x] ./a/b/c d/e
+ * * [x] ./a.b.c-d_e
+ * * [x] /codes/a/b/c d/e
+ * * [x] D:/codes/a/b/c d/e
  */
 export const fileRule = '(?:[a-z|A-Z]\:)?(?:\\.)?\\/(?:[\\w|_|\\-|\\.| ]+\\/)*[\\w|_|\\-|\\.| ]+(?:\\.\\w+)*';
 /**
  * position rule
  * like:
- * * [ ] 1,2
- * * [ ] [1,2]
- * * [ ] [1, 2]
- * * [ ] 1:2
+ * * [x] 1,2
+ * * [x] [1,2]
+ * * [x] [1, 2]
+ * * [x] 1:2
  */
 export const positionRule = '(\\d+[,|:]\\d+|\\[\\d+[,|:]\\s*\\d+\\])';
 /**
  * absolute rule
  * like:
- * * [ ] positionRule
- * * [ ] fileRule:potionRule
+ * * [x] positionRule
+ * * [x] fileRule:potionRule
  */
 export const absoluteRule = `(${fileRule}:)?${positionRule}`;
 
