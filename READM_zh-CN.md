@@ -83,4 +83,8 @@
 * Q: 为什么不支持在 python 和 go 中 (<ctrl|cmd> + mouse right click) 跳转到定义
 * A: 没有实现，个人暂时没有需求（你可以提供一个 pr 支持）
 
+## 相关
+
+在 [IDEA](https://github.com/NWYLZW/idea-comment-queries) 中使用
+
 ## [Release Notes](./CHANGELOG.md)
