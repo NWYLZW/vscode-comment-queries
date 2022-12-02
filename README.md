@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/favicon.svg" width=128 height=128 >
+  <img src="https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/favicon.png" width=128 height=128 >
 </p>
 
 # Vscode Comment Queries
