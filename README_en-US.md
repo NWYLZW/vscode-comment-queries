@@ -79,14 +79,14 @@ Show the (variable) types in your code through annotation syntax and inline prom
 
 ## Q&A
 
-Q: Why can't the prompt message be displayed?
-A: Please check if your vscode version supports the `editor.inlayHints.endabled` configuration item and set it to `on`.
-Q: An error may occur when querying in the top row or bottom row.
-A: I haven't done the verification, so I won't fix it for now.
-Q: There may be calculation errors when querying for elements with no corresponding row and column.
-A: I don't want to fix it yet, you can fix it yourself.
-Q: Why doesn't it support jumping to definition in python and go (<ctrl|cmd> + mouse right click)?
-A: It has not been implemented, and I personally do not have the need for it (you can provide a PR to support it).
+* Q: Why can't the prompt message be displayed?
+* A: Please check if your vscode version supports the `editor.inlayHints.endabled` configuration item and set it to `on`.
+* Q: An error may occur when querying in the top row or bottom row.
+* A: I haven't done the verification, so I won't fix it for now.
+* Q: There may be calculation errors when querying for elements with no corresponding row and column.
+* A: I don't want to fix it yet, you can fix it yourself.
+* Q: Why doesn't it support jumping to definition in python and go (<ctrl|cmd> + mouse right click)?
+* A: It has not been implemented, and I personally do not have the need for it (you can provide a PR to support it).
 
 ## About
 
