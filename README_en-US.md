@@ -4,14 +4,14 @@
 
 # Vscode Comment Queries
 
-|[zh-Hans](https://github.com/NWYLZW/vscode-comment-queries/blob/main/README_zh-Hans.md)
-|[en-US](https://github.com/NWYLZW/vscode-comment-queries/blob/main/README_en-US.md)
+|[zh-Hans](https://github.com/NWYLZW/vscode-comment-queries/blob/main/READM_zh-Hans.md)
+|en-US
 
-通过注释语法与内嵌提示展示你的代码中的变量类型。
+Show the (variable) types in your code through annotation syntax and inline prompts.
 
-## 演示
+## Demo
 
-### 相对查询
+### Relative Query
 
 ![pre-line-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/pre-line-point.gif)
 
@@ -21,21 +21,21 @@
 
 ![cross-line-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/cross-line-point.gif)
 
-### 绝对查询
+### Absoulute Query
 
 ![absolute-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/abs-in-cur-file.gif)
 
 ![cross-file-point](https://raw.githubusercontent.com/NWYLZW/vscode-comment-queries/main/images/cross-file-point.gif)
 
-## 功能
+## Features
 
-* 支持多语言
+* Support for multiple programming languages
   * TypeScript
   * Python
   * Golang
 
-* [x] 相对文件行列 query 查询
-    * [x] 上下文件行
+* [x] Relative file line column query
+    * [x] Up and down
 
     ```ts
     //   _x2?
@@ -45,51 +45,51 @@
     //   ^x2?
     ```
 
-    * [ ] 左右文件列
+    * [ ] Left and right
 
     ```ts
     type /*>?*/ T /*<?*/ = 1 | 2 //<4?
     ```
 
-* [x] 绝对文件行列 query 查询
-    * [x] 当前文件指定行列
+* [x] Absoulute file line column query
+    * [x] Current file
 
         ```ts
         // @114,514?
         // @[114, 514]?
         ```
 
-    * [x] 跨文件指定行列查询
-        * [x] 相对路径支持
+    * [x] Cross file
+        * [x] Absoulute path
 
             ```ts
             // @./foo.ts:114:514?
             ```
 
-        * [x] 绝对路径支持
+        * [x] Relative path
 
             ```ts
             // @/users/xxx/codes/foo.ts:114:514?
             ```
 
-## 插件配置
+## Configure
 
-* [ ] 移除提示消息的前缀
-* [ ] 消息展示长度限制
+* [ ] Remove the prefix of the prompt message
+* [ ] Message display length limit
 
 ## Q&A
 
-* Q: 为什么无法展示提示信息
-* A: 请检查你的 vscode 版本是否支持 `editor.inlayHints.endabled` 配置项，并将其设置为 `on`
-* Q: 在顶行上行查询或者底行下行查询会报错（可能）
-* A: 我没做校验，先不做
-* Q: 查询对应行列无元素的时候会偏移计算失误
-* A: 还不想修，你自己可以修
-* Q: 为什么不支持在 python 和 go 中 (<ctrl|cmd> + mouse right click) 跳转到定义
-* A: 没有实现，个人暂时没有需求（你可以提供一个 pr 支持）
+Q: Why can't the prompt message be displayed?
+A: Please check if your vscode version supports the `editor.inlayHints.endabled` configuration item and set it to `on`.
+Q: An error may occur when querying in the top row or bottom row.
+A: I haven't done the verification, so I won't fix it for now.
+Q: There may be calculation errors when querying for elements with no corresponding row and column.
+A: I don't want to fix it yet, you can fix it yourself.
+Q: Why doesn't it support jumping to definition in python and go (<ctrl|cmd> + mouse right click)?
+A: It has not been implemented, and I personally do not have the need for it (you can provide a PR to support it).
 
-## 相关
+## About
 
-在 [IDEA](https://github.com/NWYLZW/idea-comment-queries) 中使用
+Using in [IDEA](https://github.com/NWYLZW/idea-comment-queries).
 
 ## [Release Notes](./CHANGELOG.md)
