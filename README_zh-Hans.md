@@ -4,6 +4,9 @@
 
 # Vscode Comment Queries
 
+|zh-Hans
+|[en-US](https://github.com/NWYLZW/vscode-comment-queries/blob/main/README_en-US.md)
+
 通过注释语法与内嵌提示展示你的代码中的变量类型。
 
 ## 演示
@@ -85,6 +88,6 @@
 
 ## 相关
 
-在 [IDEA](https://github.com/NWYLZW/idea-comment-queries) 中使用
+在 [IDEA](https://github.com/NWYLZW/idea-comment-queries) 中使用。
 
 ## [Release Notes](./CHANGELOG.md)
