@@ -80,7 +80,7 @@ Show the (variable) types in your code through annotation syntax and inline prom
 ## Q&A
 
 * Q: Why can't the prompt message be displayed?
-* A: Please check if your vscode version supports the `editor.inlayHints.endabled` configuration item and set it to `on`.
+* A: Please check if your vscode version supports the `editor.inlayHints.enabled` configuration item and set it to `on`.
 * Q: An error may occur when querying in the top row or bottom row.
 * A: I haven't done the verification, so I won't fix it for now.
 * Q: There may be calculation errors when querying for elements with no corresponding row and column.
