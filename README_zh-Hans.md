@@ -7,7 +7,7 @@
 |zh-Hans
 |[en-US](https://github.com/NWYLZW/vscode-comment-queries/blob/main/README_en-US.md)
 
-通过注释语法与内嵌提示展示你的代码中的变量类型。
+通过注释语法与内嵌提示展示你的代码中的变量类型，通过[插件商店](https://marketplace.visualstudio.com/items?itemName=YiJie.vscode-comment-queries)安装。
 
 ## 演示
 
