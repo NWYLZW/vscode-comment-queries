@@ -7,7 +7,7 @@
 |[zh-Hans](https://github.com/NWYLZW/vscode-comment-queries/blob/main/READM_zh-Hans.md)
 |en-US
 
-Show the (variable) types in your code through annotation syntax and inline prompts.
+Show the (variable) types in your code through annotation syntax and inline prompts, install it by [marketplace](https://marketplace.visualstudio.com/items?itemName=YiJie.vscode-comment-queries).
 
 ## Demo
 
