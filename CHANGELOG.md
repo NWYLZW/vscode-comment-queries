@@ -7,7 +7,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [Unreleased]
 
 * [ ] 多语言支持
-  * [ ] rust
   * [ ] ...任何有 lsp 的语言
 * [ ] 更多的文件支持
   * [ ] markdown
@@ -31,6 +30,16 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   //   ^2?['a'] (property) [{ b: { c: number; }; }]
   ```
   * vscode's ts language server 尚未允许调用[更多的指令](https://github.com/microsoft/vscode/blob/3a52e79cead6fa54139f5d0098c3380c6546ab4a/extensions/typescript-language-features/src/commands/tsserverRequests.ts#L26-L37)，无法通过 run command 的方式拿到对应的类型。
+
+## [1.2.4] - 2024-05-24
+
+### 新功能
+
+* [x] 支持 rust
+
+## [1.2.3] - 2022-12-02
+
+No changes, only update README.md.
 
 ## [1.2.2] - 2022-12-02
 
