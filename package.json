@@ -1,6 +1,6 @@
 {
   "name": "vscode-comment-queries",
-  "icon": "favicon.png",
+  "icon": "extension/favicon.png",
   "displayName": "vscode-comment-queries",
   "description": "Query type by comment.",
   "publisher": "YiJie",
