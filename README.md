@@ -92,4 +92,4 @@
 
 在 [IDEA](https://github.com/NWYLZW/idea-comment-queries) 中使用
 
-## [Release Notes](./CHANGELOG.md)
+## [Release Notes](https://github.com/NWYLZW/vscode-comment-queries/blob/main/CHANGELOG.md)
