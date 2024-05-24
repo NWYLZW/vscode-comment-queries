@@ -33,6 +33,7 @@ Show the (variable) types in your code through annotation syntax and inline prom
   * TypeScript
   * Python
   * Golang
+  * Rust
 
 * [x] Relative file line column query
     * [x] Up and down

@@ -33,6 +33,7 @@
   * TypeScript
   * Python
   * Golang
+  * Rust
 
 * [x] 相对文件行列 query 查询
     * [x] 上下文件行
