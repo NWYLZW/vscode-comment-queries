@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import inlayHintsProviderForJSAndTS from "./langs/js&ts";
 import inlayHintsProviderForPY from "./langs/py";
 import inlayHintsProviderForGO from "./langs/go";
+import inlayHintsProviderForRust from "./langs/rust";
 import logger from "./logger";
 import matchers from "./matchers";
 
@@ -11,6 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
     inlayHintsProviderForJSAndTS(),
     inlayHintsProviderForPY(),
     inlayHintsProviderForGO(),
+    inlayHintsProviderForRust(),
   ]);
   context.subscriptions.push(
     vscode.languages.registerDefinitionProvider(
